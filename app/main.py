@@ -2,16 +2,14 @@ def format_linter_error(error: dict) -> dict:
     return {
         "line": error["line_number"],
         "column": error["column_number"],
-        "name": error["code"],
+        "code": error["code"],
         "message": error["text"],
-        "source": "flake8",
     }
 
 
 def format_single_linter_file(file_path: str, errors: list) -> dict:
     return {
-        "path": file_path,
-        "status": "failed" if errors else "passed",
+        "file_path": file_path,
         "errors": [format_linter_error(error) for error in errors],
     }
 
